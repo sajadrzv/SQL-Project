@@ -1,0 +1,166 @@
+
+
+/* ****CATSKILL UNIVERSITY**** */
+
+/* Create the STUDENT table */
+CREATE TABLE STUDENT (
+StuID    CHAR (10)       NOT NULL, 
+StuName  VARCHAR (50)    NOT NULL,
+StuAddr  VARCHAR (150)   NULL,
+StuEmail VARCHAR (50)    NOT NULL,
+CONSTRAINT STUDENTPK	PRIMARY KEY (StuID)
+);		
+
+/*Insert records into STUDENT*/
+INSERT INTO STUDENT (StuID,	StuName,	StuAddr,	StuEmail)
+			VALUES ('1001',	'Robert Murphy','99176 Anderson Mills','Robertm@catskill.edu'); 
+INSERT INTO STUDENT (StuID,	StuName,	StuAddr,	StuEmail)
+			VALUES ('1002',	'James Hamilton', '73488 Sydney Ports', 'Jamesh@catskill.edu');
+INSERT INTO STUDENT (StuID,	StuName,	StuAddr,	StuEmail)
+			VALUES ('1003',	'Judy White', '18580 Rosario Ville', 'Judyw@catskill.edu'); 
+INSERT INTO STUDENT (StuID,	StuName,	StuAddr,	StuEmail)
+			VALUES ('1004',	   'Devin Jordan',	'81127 Angela Ferry', 'Devinj@catskill.edu');  
+INSERT INTO STUDENT (StuID,	StuName,	StuAddr,	StuEmail)
+			VALUES ('1005',	   'Nicole Mcmahon',	'200 Rockfall Ave', 'Nicolem@catskill.edu');
+
+
+
+
+
+/* Create the EMPLOYEE table */
+CREATE TABLE EMPLOYEE (
+EmpID    CHAR (10)       NOT NULL, 
+EmpName  VARCHAR (50)    NOT NULL,
+EmpAddr  VARCHAR (150)   NULL,
+EmpEmail VARCHAR (50)    NOT NULL,
+CONSTRAINT EMPLOYEEPK	PRIMARY KEY (EmpID)
+);		
+
+/*Insert records into EMPLOYEE*/
+INSERT INTO EMPLOYEE (EmpID,	EmpName,	EmpAddr,	EmpEmail)
+			VALUES ('101',	'Amin Bram',	'120 East Poe Ave', 'Aminb@gmail.com'); 
+INSERT INTO EMPLOYEE (EmpID,	EmpName,	EmpAddr,	EmpEmail)
+			VALUES ('102',	'Ahmed Saed', '122 College St', 'Ahmeds@gmail.com');
+INSERT INTO EMPLOYEE (EmpID,	EmpName,	EmpAddr,	EmpEmail)
+			VALUES ('103',	'Ali Jrodan', '200 Maron Ave', 'Alij@gmail.com'); 
+INSERT INTO EMPLOYEE (EmpID,	EmpName,	EmpAddr,	EmpEmail)
+			VALUES ('104',	   'Elnaz James',	'100 Olive Ave', 'Elnazj@gmail.com');  
+INSERT INTO EMPLOYEE (EmpID,	EmpName,	EmpAddr,	EmpEmail)
+			VALUES ('105',	   'Sara Rash',	'405 Porsh Ave', 'Sarar@gmail.com');
+
+
+
+
+
+
+/* Create the AUTHOR table */
+CREATE TABLE AUTHOR (
+AuthorID    CHAR (10)       NOT NULL, 
+AuthorName  VARCHAR (50)    NOT NULL,
+AuthorAddr  VARCHAR (150)   NULL,
+AuthorEmail VARCHAR (50)    NOT NULL,
+CONSTRAINT AUTHORPK	PRIMARY KEY (AuthorID)
+);		
+
+/*Insert records into AUTHOR*/
+INSERT INTO AUTHOR (AuthorID,	AuthorName,	AuthorAddr,	AuthorEmail)
+			VALUES ('11',	'Nima Yoshij',	'289 Kakh St', 'Nimay@gmail.com'); 
+INSERT INTO AUTHOR (AuthorID,	AuthorName,	AuthorAddr,	AuthorEmail)
+			VALUES ('12',	'Sohrab Sepehri', '210 Kashan Ave', 'Sohrabs@gmail.com');
+INSERT INTO AUTHOR (AuthorID,	AuthorName,	AuthorAddr,	AuthorEmail)
+			VALUES ('13',	'Charles Anif', '2810 Roosevelt Ave', 'Charlesa@gmail.com'); 
+INSERT INTO AUTHOR (AuthorID,	AuthorName,	AuthorAddr,	AuthorEmail)
+			VALUES ('14',	   'Mehdi Akhavan',	'310 Esfahan Ave', 'Mehdia@gmail.com');  
+INSERT INTO AUTHOR (AuthorID,	AuthorName,	AuthorAddr,	AuthorEmail)
+			VALUES ('15',	   'Parvin Etesami',	'910 Kashan Ave', 'Parvine@gmail.com');
+
+
+
+
+/* Create the PUBLISHER table */
+CREATE TABLE PUBLISHER (
+PubID    CHAR (10)       NOT NULL, 
+PubName  VARCHAR (50)    NOT NULL,
+PubAddr  VARCHAR (150)   NULL,
+PubEmail VARCHAR (50)    NOT NULL,
+CONSTRAINT PUBLISHERPK	PRIMARY KEY (PubID)
+);		
+
+/*Insert records into PUBLISHER*/
+INSERT INTO PUBLISHER (PubID,	PubName,	PubAddr,	PubEmail)
+			VALUES ('500',	'Hedayat',	'45 Stamford Ave', 'Hedayatpublisher@gmail.com'); 
+INSERT INTO PUBLISHER (PubID,	PubName,	PubAddr,	PubEmail)
+			VALUES ('501',	'Meshkat', '230 Pitch Ave', 'Meshkatpublisher@gmail.com');
+INSERT INTO PUBLISHER (PubID,	PubName,	PubAddr,	PubEmail)
+			VALUES ('502',	'Harper', '124 Kent Ave', 'Harperpublisher@gmail.com'); 
+INSERT INTO PUBLISHER (PubID,	PubName,	PubAddr,	PubEmail)
+			VALUES ('503',	   'Danvile',	'1220 Sepehr Ave', 'Danvilepublisher@gmail.com');  
+INSERT INTO PUBLISHER (PubID,	PubName,	PubAddr,	PubEmail)
+			VALUES ('504',	   'Brayan',	'1010 Perth Ave', 'Brayanpublisher@gmail.com');
+
+
+
+
+/* Create the BOOK table */
+CREATE TABLE BOOK (
+BookID   CHAR (10)       NOT NULL, 
+BookName VARCHAR (50)    NOT NULL,
+NoOfPage INT             NOT NULL,
+ISBNNum  VARCHAR (100)   NOT NULL,
+StuID    CHAR (10)       NULL, 
+EmpID    CHAR (10)       NULL, 
+PubID    CHAR (10)       NOT NULL,
+CONSTRAINT BOOKPK	PRIMARY KEY (BookID),
+CONSTRAINT BOOKFK1 FOREIGN KEY (StuID) REFERENCES STUDENT (StuID)
+								ON UPDATE cascade 
+								ON DELETE NO ACTION ,
+CONSTRAINT BOOKFK2 FOREIGN KEY (EmpID) REFERENCES EMPLOYEE (EmpID)
+								ON UPDATE cascade 
+								ON DELETE NO ACTION ,
+CONSTRAINT BOOKFK3 FOREIGN KEY (PubID) REFERENCES PUBLISHER (PubID)
+								ON UPDATE cascade 
+								ON DELETE NO ACTION 
+);	
+
+/*Insert records into BOOK*/
+INSERT INTO BOOK (BookID,	BookName,	NoOfPage,	ISBNNum, StuID, EmpID, PubID)
+			VALUES ('10001', 'Secrets', 208, '578-0545162074','1001',Null,'500'); 
+INSERT INTO BOOK (BookID,	BookName,	NoOfPage,	ISBNNum,	StuID, EmpID, PubID)
+			VALUES ('10002',	'Harry', 485, '948-415526632', Null, '102', '502');
+INSERT INTO BOOK (BookID,	BookName,	NoOfPage,	ISBNNum,	StuID, EmpID, PubID)
+			VALUES ('10003', 'Seminal', 329, '976-5245126351',	'1003', Null,'502'); 
+INSERT INTO BOOK (BookID,	BookName,	NoOfPage,	ISBNNum,	StuID, EmpID, PubID)
+			VALUES ('10004', 'life', 180,	'822-8259816235', '1001', Null,'503');  
+INSERT INTO BOOK (BookID,	BookName,	NoOfPage,	ISBNNum,	StuID, EmpID, PubID)
+			VALUES ('10005', 'Big Deal', 320, '840-4527816829', '1004', Null,'502');
+
+
+
+
+
+/* Create the BOOK_AUTH table */
+CREATE TABLE BOOK_AUTH (
+BookAuthID CHAR (10)       NOT NULL, 
+BookID     CHAR (10)       NOT NULL, 
+AuthorID   CHAR (10)       NOT NULL,
+CONSTRAINT BOOK_AUTHPK	PRIMARY KEY (BookAuthID),
+CONSTRAINT BOOK_AUTHFK1 FOREIGN KEY (BookID) REFERENCES BOOK (BookID)
+								ON UPDATE cascade 
+								ON DELETE NO ACTION ,
+CONSTRAINT BOOK_AUTHFK2 FOREIGN KEY (AuthorID) REFERENCES AUTHOR (AuthorID)
+								ON UPDATE cascade 
+								ON DELETE NO ACTION 
+);	
+/*Insert records into BOOK_AUTHOK*/
+INSERT INTO BOOK_AUTH (BookAuthID, BookID, AuthorID)
+			VALUES ('801', '10001', '11'); 
+INSERT INTO BOOK_AUTH (BookAuthID, BookID, AuthorID)
+			VALUES ('802', '10002', '12');
+INSERT INTO BOOK_AUTH (BookAuthID, BookID, AuthorID)
+			VALUES ('803', '10003', '13'); 
+INSERT INTO BOOK_AUTH (BookAuthID, BookID, AuthorID)
+			VALUES ('804', '10004', '14');  
+INSERT INTO BOOK_AUTH (BookAuthID, BookID, AuthorID)
+			VALUES ('805', '10005', '15');
+
+
